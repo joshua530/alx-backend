@@ -52,7 +52,12 @@ class Server:
             next_page = None
         total_pages = math.ceil(len(dataset) / page_size)
         len_page = len(data)
-        return {'page_size':len_page, 'page': page, 'data': data, 'next_page': next_page, 'prev_page':prev_page, 'total_pages':total_pages}
+        return {
+            'page_size': len_page, 'page':  page, 'data':  data,
+            'next_page':  next_page, 'prev_page': prev_page,
+            'total_pages': total_pages
+        }
+
 
 def index_range(page: int, page_size: int) -> tuple:
     """
