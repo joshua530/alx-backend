@@ -6,7 +6,7 @@ Paginates according to given indices
 
 import csv
 import math
-from typing import List
+from typing import Any, Dict, List
 
 
 class Server:
@@ -37,11 +37,27 @@ class Server:
             return []
         return dataset[begin: end]
 
+    # TODO
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
+        """fetches a page from a given dataset and adds some extra data"""
+        dataset = self.dataset()
+        data = self.get_page(page, page_size)
+        if page - 1 < 1:
+            prev_page = None
+        else:
+            prev_page = page - 1
+        if (page + 1) * page_size <= len(dataset):
+            next_page = page + 1
+        else:
+            next_page = None
+        total_pages = math.ceil(len(dataset) / page_size)
+        len_page = len(data)
+        return {'page_size':len_page, 'page': page, 'data': data, 'next_page': next_page, 'prev_page':prev_page, 'total_pages':total_pages}
 
 def index_range(page: int, page_size: int) -> tuple:
     """
     Paginates according to given indices
-    indices are 1-based
+    input indices are 1-based, output are zero based
     """
     begin = (page - 1) * page_size
     end = begin + page_size
