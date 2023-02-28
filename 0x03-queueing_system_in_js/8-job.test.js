@@ -1,6 +1,6 @@
-const createPushNotificationsJobs = require('./8-job')
-const kue = require('kue')
-const {expect} = require('chai')
+const kue = require('kue');
+const { expect } = require('chai');
+const createPushNotificationsJobs = require('./8-job');
 
 const queue = kue.createQueue();
 
@@ -16,15 +16,15 @@ const jobs = [
 ];
 
 describe('createPushNotificationsJobs', () => {
-  before(function () {
+  before(() => {
     queue.testMode.enter();
   });
 
-  afterEach(function () {
+  afterEach(() => {
     queue.testMode.clear();
   });
 
-  after(function () {
+  after(() => {
     queue.testMode.exit();
   });
 
@@ -56,7 +56,7 @@ describe('createPushNotificationsJobs', () => {
     expect(ret).to.equal(undefined);
   });
 
-  it(' create two new jobs to the queue', () => {
+  it('create two new jobs to the queue', () => {
     createPushNotificationsJobs(jobs, queue);
     expect(queue.testMode.jobs.length).to.equal(2);
 

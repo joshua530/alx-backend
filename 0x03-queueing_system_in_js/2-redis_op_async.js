@@ -1,7 +1,8 @@
-const {promisify} = require('util');
+const { promisify } = require('util');
 const redis = require('redis');
+
 const client = redis.createClient();
-const print = redis.print()
+const print = redis.print();
 
 client.on('error', (err) => {
   console.log('Redis client not connected to the server:', err.toString());
