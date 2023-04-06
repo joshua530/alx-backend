@@ -5,12 +5,23 @@ from collections import OrderedDict
 
 
 class LFUCache(BaseCaching):
-    """ Class that inherits from BaseCaching and is a caching system """
+    """ LFU cache implementation """
     def __init__(self):
         """init method"""
         super().__init__()
         self.lru_cache = OrderedDict()
         self.lfu_cache = {}
+
+    def get(self, key):
+        """ fetches value from lfu cache """
+        if key in self.lru_cache:
+            value = self.lru_cache[key]
+            self.lru_cache.move_to_end(key)
+            if key in self.lfu_cache:
+                self.lfu_cache[key] += 1
+            else:
+                self.lfu_cache[key] = 1
+            return value
 
     def put(self, key, item):
         """ Assign to the dictionary, LFU algorithm """
@@ -37,14 +48,3 @@ class LFUCache(BaseCaching):
         else:
             self.lfu_cache[key] = 1
         self.cache_data = dict(self.lru_cache)
-
-    def get(self, key):
-        """ Return the value linked """
-        if key in self.lru_cache:
-            value = self.lru_cache[key]
-            self.lru_cache.move_to_end(key)
-            if key in self.lfu_cache:
-                self.lfu_cache[key] += 1
-            else:
-                self.lfu_cache[key] = 1
-            return value
