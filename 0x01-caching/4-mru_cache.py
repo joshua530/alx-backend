@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-""" MRU Caching """
+""" contains MRU Cache implementation """
 from base_caching import BaseCaching
 
 
 class MRUCache(BaseCaching):
-    """ Class that inherits from BaseCaching and is a caching system """
+    """ mru cache implementation """
     def __init__(self):
         """init method"""
         super().__init__()
@@ -30,15 +30,8 @@ class MRUCache(BaseCaching):
         self.handle(self.prev[self.tail], key)
         self.handle(key, self.tail)
 
-    def put(self, key, item):
-        """ Assign to the dictionary """
-        if key and item:
-            if key in self.cache_data:
-                self._remove(key)
-            self._add(key, item)
-
     def get(self, key):
-        """ Return the value linked """
+        """ fetch item from cache """
         if key is None or self.cache_data.get(key) is None:
             return None
         if key in self.cache_data:
@@ -46,3 +39,10 @@ class MRUCache(BaseCaching):
             self._remove(key)
             self._add(key, value)
             return value
+
+    def put(self, key, item):
+        """ set item in cache """
+        if key and item:
+            if key in self.cache_data:
+                self._remove(key)
+            self._add(key, item)
