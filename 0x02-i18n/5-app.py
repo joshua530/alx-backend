@@ -45,6 +45,8 @@ def get_locale() -> str:
 def index() -> str:
     """
     hello world
+
+    fetches index page
     """
     return render_template('5-index.html')
 

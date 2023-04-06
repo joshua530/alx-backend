@@ -8,6 +8,8 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
     """ GET /
+
+    fetches index page
     """
     return render_template('0-index.html')
 

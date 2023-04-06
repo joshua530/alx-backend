@@ -79,6 +79,8 @@ def validate_timezone(tz: str) -> str:
 def index() -> str:
     """
     main page - hello world
+
+    fetches index page
     """
     return render_template('7-index.html')
 

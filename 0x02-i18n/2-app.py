@@ -20,6 +20,8 @@ app.config.from_object('1-app.Config')
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index() -> str:
     """ GET / method
+
+    fetches index page
     """
     return render_template('2-index.html')
 

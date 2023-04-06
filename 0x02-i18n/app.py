@@ -80,6 +80,8 @@ def validate_timezone(tz: str) -> str:
 def index() -> str:
     """
     main page of the flask application
+
+    fetches index page
     """
     return render_template('index.html')
 
